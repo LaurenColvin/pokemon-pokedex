@@ -30,9 +30,13 @@ nav {
 
 h1 {
   margin-top: 50px;
-  color: purple;
   font-family: sans-serif;
   font-weight: 1;
+}
+
+.nav-links {
+  text-decoration: none;
+  color: purple;
 }
 
 button {
@@ -42,6 +46,7 @@ button {
   border-radius: 8px;
   height: 40px;
   width: 200px;
+  margin-bottom: 30px;
 }
 
 .pokemon-list-item {
@@ -62,8 +67,27 @@ button {
   justify-content: space-between;
 }
 
+.pokemon-link {
+  text-decoration: none;
+  color: black;
+}
+
 .pokeball {
   height: 15px;
   padding-right: 15px;
   padding-top: 5px;
+}
+
+.pokedex {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.left-sidebar {
+  grid-column: 1 / 2;
+}
+.right-sidebar {
+  background-color: white;
+  grid-column: 2 / 3;
+  border-left: 30px solid;
 }

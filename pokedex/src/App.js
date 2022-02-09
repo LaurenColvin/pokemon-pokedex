@@ -1,33 +1,12 @@
 import './App.css';
+import { Route, Link, Routes, Navigate } from "react-router-dom";
 import { useState } from "react";
+import Pokedex from './Pokedex/Pokedex'
+import MyTeam from './MyTeam/MyTeam'
+import Pokemon from './Pokemon/Pokemon'
 let urlBase='https://pokeapi.co/api/v2/pokemon?offset=0&limit=200';
 
 function App() {
-
-const [pokeData, setPokeData] = useState([])
-
-
-const buttonHandleSubmit = (event) => {
-    event.preventDefault();
-    fetch(urlBase)
-      .then((response) => response.json())
-      .then ((data) => setPokeData(data.results))
-      .catch(() => console.log("oops, error"))
-  };
-
-const list = pokeData.map((pokemon, index) => {
-    return (
-    <li key={index} className='pokemon-list-item'>
-        {pokemon.name} 
-        <img 
-            className='pokeball' 
-            src='https://www.pngarts.com/files/4/Pokeball-PNG-Image-Transparent-Background.png' 
-            alt='pokeball'/>
-     </li>
-  )
-})
-
-
 
 
   return (
@@ -35,17 +14,16 @@ const list = pokeData.map((pokemon, index) => {
       <nav>
         <img className='pikachu' src='http://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png' alt='Pikachu' />
         <div className='center-logo'>
-            <h1>Pokédex</h1>
+            <h1><Link className='nav-links' to='/pokedex'>Pokédex</Link></h1>
             <img className='logo' src='https://www.freepnglogos.com/uploads/pokemon-logo-png-0.png' alt='logo' />
-            <h1>My Team</h1>
+            <h1><Link className='nav-links' to='/myteam'>My Team</Link></h1>
         </div>
       </nav>
       <div className='main'>
-          <button onClick={buttonHandleSubmit}>ALL POKEMON</button>
-          <div className='poke-list'>
-              {list}
-          </div>
-          <div className='side-bar'></div>
+        <Routes>
+          <Route path='/pokedex' element={<Pokedex/>} />
+          <Route path='/myteam' element={<MyTeam />} />
+        </Routes> 
       </div>
     </div>
   );
