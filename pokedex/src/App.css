@@ -25,6 +25,11 @@ nav {
   margin: 10px 30px;
 }
 
+.pikachu-2 {
+  height: 80px;
+  margin: 10px 30px;
+}
+
 .logo {
   height: 180px;
   margin-top: -40px;
@@ -61,6 +66,10 @@ h3 {
   margin-bottom: 30px;
 }
 
+.poke-list {
+  margin-top: 30px;
+}
+
 .pokemon-list-item {
   text-align: left;
   padding-left: 40px;
@@ -79,10 +88,6 @@ h3 {
   justify-content: space-between;
 }
 
-.pokemon-link {
-  text-decoration: none;
-  color: black;
-}
 
 .pokeball {
   height: 15px;
@@ -109,6 +114,10 @@ h3 {
   border-radius: 5px;
   width: 250px;
   margin: 100px auto;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .sprite {
@@ -117,9 +126,37 @@ h3 {
 }
 
 button {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .images-container {
   display: flex;
+}
+
+.sprite-team {
+  height: 150px;
+  margin-bottom: -40px;
+}
+
+.my-team {
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 2;
+}
+
+.team {
+  width: 200px;
+}
+
+.pokeball-div {
+  border: 30px solid;
+  border-radius: 500px;
+  width: 250px;
+  height: 250px;
+  margin-left: 82%;
+  margin-bottom: -500px;
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
 }
