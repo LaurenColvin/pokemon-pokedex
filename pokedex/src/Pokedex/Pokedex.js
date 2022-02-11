@@ -25,7 +25,7 @@ useEffect (() => {
 //       .then((response) => response.json())
 //       .then ((data) => setCurrentPokemon(data))
 //       .catch(() => console.log("oops, error"))
-// }, [singleUrl])
+// }, [pokeData])
 
 
 const list = pokeData.map((pokemon, index) => {
@@ -152,13 +152,14 @@ const [genusData, setGenusData] = useState([
 }
 ])
 
-  const pokemonGenus = (data) => {
-     fetch(data.url)
-      .then((response) => response.json())
-      .then ((data) => setGenusData(data.genera))
-      .catch(() => console.log("oops, error"));
-      console.log(genusData[2].genus)
- };
+useEffect(() => {
+    if (singleData.species !== undefined) {
+      fetch(singleData.species.url)
+        .then((response) => response.json())
+        .then((data) => setGenusData(data.genera[2].genus))
+        .catch(() => console.log("oops error"));
+    }
+  }, [singleData]);
 
     return (
         <div className='pokedex'>
@@ -182,7 +183,7 @@ const [genusData, setGenusData] = useState([
                         <h3>Height: {currentPokemon.height}</h3>
                         <h3>Weight: {currentPokemon.weight}</h3>
                         <h3>Type: {pokemonType(currentPokemon.types)}  </h3>
-                        <h3>{genusData[2].genus}</h3>
+                        <h3>{genusData}</h3>
                         {teamButton ? (
                         <button onClick={handleSubmit}>Add to Team </button>
                          ) : (
