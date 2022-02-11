@@ -6,7 +6,6 @@ const MyTeam = (props) => {
 const removePokemon = (id) => {
     const teamCopy = [...props.team];
     const filteredItems = teamCopy.filter((pokemon) => pokemon.id !== id);
-    console.log(filteredItems);
     props.setTeam(filteredItems);
   };
 
@@ -24,14 +23,15 @@ const list = props.team.map((currentPokemon) => {
 
     return (
         <div className='pokedex'>
-            <div className='left-sidebar'>
-            </div>
-            <div className='right-sidebar'>
-            </div>
+                <div className='left-sidebar'>
+                </div>
+                
+                <div className='right-sidebar'>
+                </div>
+                <div className='pokeball-div'>
+                </div>
             <div className='my-team'>
                 {list}
-            </div>
-            <div className='pokeball-div'>
             </div>
         </div>
     )

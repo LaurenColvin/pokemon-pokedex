@@ -4,75 +4,10 @@ let urlBase='https://pokeapi.co/api/v2/pokemon';
 
 const Pokedex = (props) => {
 
+const [teamButton, setTeamButton] = useState(true);
 const [pokeData, setPokeData] = useState([])
-const [currentPokemon, setCurrentPokemon] = useState({
-"abilities": [],
-"base_experience": 64,
-"forms": [
-{
-"name": "bulbasaur",
-"url": "https://pokeapi.co/api/v2/pokemon-form/1/"
-}
-],
-"game_indices": [],
-"height": 7,
-"held_items": [],
-"id": 1,
-"is_default": true,
-"location_area_encounters": "https://pokeapi.co/api/v2/pokemon/1/encounters",
-"moves": [],
-"name": "bulbasaur",
-"order": 1,
-"past_types": [],
-"species": {
-"name": "bulbasaur",
-"url": "https://pokeapi.co/api/v2/pokemon-species/1/"
-},
-"sprites": {
-"back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
-"back_female": null,
-"back_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png",
-"back_shiny_female": null,
-"front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-"front_female": null,
-"front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png",
-"front_shiny_female": null,
-"other": {
-"dream_world": {
-"front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg",
-"front_female": null
-},
-"home": {
-"front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png",
-"front_female": null,
-"front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/1.png",
-"front_shiny_female": null
-},
-"official-artwork": {
-"front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-}
-},
-"versions": {}
-},
-"stats": [],
-"types": [
-{
-"slot": 1,
-"type": {
-"name": "grass",
-"url": "https://pokeapi.co/api/v2/type/12/"
-}
-},
-{
-"slot": 2,
-"type": {
-"name": "poison",
-"url": "https://pokeapi.co/api/v2/type/4/"
-}
-}
-],
-"weight": 69
-})
+const [currentPokemon, setCurrentPokemon] = useState({})
+const [singleUrl, setSingleUrl] = useState('')
 
 
 useEffect (() => {
@@ -81,20 +16,19 @@ useEffect (() => {
       .then((response) => response.json())
       .then ((data) => setPokeData(data.results))
       .catch(() => console.log("oops, error"))
+    // setSingleUrl(pokeData[0].url)
 })
   
 
-
 // useEffect (() => {
-//     let url = pokeData.results[0].url
-//     fetch(url)
+//     fetch(singleUrl)
 //       .then((response) => response.json())
 //       .then ((data) => setCurrentPokemon(data))
 //       .catch(() => console.log("oops, error"))
-// }, [])
+// }, [singleUrl])
+
 
 const list = pokeData.map((pokemon, index) => {
-
     const handleClick = (event) => {
     event.preventDefault();
     let url = pokemon.url
@@ -116,9 +50,20 @@ const list = pokeData.map((pokemon, index) => {
 })
 
  const addTeam = (pokemon) => {
-    const teamCopy = [...props.team];
-    teamCopy.push(pokemon);
-    props.setTeam(teamCopy);
+    if (props.team.length < 6) {
+        setTeamButton(true)
+        const teamCopy = [...props.team];
+        teamCopy.push(pokemon);
+        props.setTeam(teamCopy);
+    // } else if (props.team.length === 6) {
+    //     const teamCopy = [...props.team];
+    //     teamCopy.push(pokemon);
+    //     props.setTeam(teamCopy);
+    //     setTeamButton(false)
+    } else {
+        console.log('team full')
+        setTeamButton(false)
+    }
   };
 
  const handleSubmit = (event) => {
@@ -212,6 +157,7 @@ const [genusData, setGenusData] = useState([
       .then((response) => response.json())
       .then ((data) => setGenusData(data.genera))
       .catch(() => console.log("oops, error"));
+      console.log(genusData[2].genus)
  };
 
     return (
@@ -222,6 +168,11 @@ const [genusData, setGenusData] = useState([
                 </div>
             </div>
             <div className='right-sidebar'>
+            {currentPokemon.species === undefined ? (
+                 <div className='individual-pokemon'>
+                    <h2>Choose your Pokemon!</h2>
+                 </div>
+            ) : (
                 <div className='individual-pokemon' >
                         <div className='images-container'>
                             <img className='sprite' src={currentPokemon.sprites.front_default} alt='poke-img'/>
@@ -232,8 +183,13 @@ const [genusData, setGenusData] = useState([
                         <h3>Weight: {currentPokemon.weight}</h3>
                         <h3>Type: {pokemonType(currentPokemon.types)}  </h3>
                         <h3>{genusData[2].genus}</h3>
+                        {teamButton ? (
                         <button onClick={handleSubmit}>Add to Team </button>
+                         ) : (
+                        <button onClick={handleSubmit}>Team is Full </button>
+                        )}
                 </div>
+            )}
             </div>
             <div className='pokeball-div'>
             </div>

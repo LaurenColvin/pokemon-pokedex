@@ -98,22 +98,30 @@ h3 {
 .pokedex {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  z-index: 0;
 }
 
 .left-sidebar {
   grid-column: 1 / 2;
+  z-index: 0;
+  position: sticky;
+  top: 0;
+  height: 100%;
 }
 .right-sidebar {
   grid-column: 2 / 3;
   border-left: 30px solid;
   background-color: white;
+  position: sticky;
+  top: 0;
+  height: 200vh;
 }
 
 .individual-pokemon {
   border: 3px solid;
   border-radius: 5px;
   width: 250px;
-  margin: 100px auto;
+  margin: 18px auto;
   background-color: white;
   position: sticky;
   top: 0;
@@ -141,20 +149,24 @@ button {
 .my-team {
   display: flex;
   flex-wrap: wrap;
-  z-index: 2;
+  position: absolute;
+  grid-column: 1 / 3;
+  top: 10;
 }
 
 .team {
   width: 200px;
+  margin: 100px 10px;
 }
 
 .pokeball-div {
   border: 30px solid;
   border-radius: 500px;
-  width: 250px;
-  height: 250px;
-  margin-left: 82%;
+  width: 200px;
+  height: 200px;
+  margin-left: 87%;
   margin-bottom: -500px;
+  padding-bottom: -100px;
   background-color: white;
   position: sticky;
   bottom: 0;
